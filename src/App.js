@@ -1,54 +1,37 @@
-import React,{useReducer} from 'react';
+import React from 'react';
 import './App.css';
-import {BrowserRouter,
-  Switch,
-  Route,
-} from "react-router-dom";
+import {BrowserRouter,Switch,Route} from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute'
-import MyPage from './screens/myPage';
+import Home from './screens/home';
 import Login from './screens/login';
-import Logout from './screens/logout';
 import Navigate from './screens/Navigate';
+import Register from './screens/registration';
+import firebase, { FirebaseContext } from "./firebase";
+import useAuth from './utils/useAuth';
 
 
 
 function App() {
 
-const initialState = {
-  user : false
-}
-const reducer = (state, action ) =>{
-    switch(action.type){
-      case "USER" :
-        return{
-          ...state,
-          user : action.payload
-        }
-        default :
-        return state
-    }
-}
-
-
-
-const [state,dispatch] = useReducer(reducer,initialState)
-const {user} = state;
+  const user = useAuth();
 
 
   return (
+    <FirebaseContext.Provider value={{ user, firebase }}>
       <BrowserRouter>
     <div className="App">
         <Navigate/>
         <Switch>
-          <Route exact path="/login" render = {()=> < Login dispatch={dispatch}/>} />
-          <Route exact path="/logout"  render = {()=> < Logout dispatch={dispatch}/>}/>
-          <PrivateRoute authenticated={user} path="/mypage" component={MyPage} />
-          {/* <PrivateRoute path="/mypage">
-              <MyPage />
+          <Route  path="/login" render = {()=> < Login />} />
+          <Route exact path="/registration"  render = {()=> < Register />}/>
+          <PrivateRoute authenticated={user} component={Home} />
+          {/* <PrivateRoute path="/home">
+              <Home />
             </PrivateRoute> */}
         </Switch>
     </div>
     </BrowserRouter>
+    </FirebaseContext.Provider>
   );
 }
 

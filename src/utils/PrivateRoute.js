@@ -15,24 +15,24 @@ const  PrivateRoute =  ({component: Component, authenticated, ...rest}) => {
     )
   }
 
-//   const PrivateRoute = ({ children, isAuth, ...rest }) => {
-//     return (
-//       <Route
-//         {...rest}
-//         render={({ location }) =>
-//         localStorage.getItem('user') ? (
-//             children
-//           ) : (
-//             <Redirect
-//               to={{
-//                 pathname: "/login",
-//                 state: { from: location }
-//               }}
-//             />
-//           )
-//         }
-//       />
-//     );
-//   }
+  // const PrivateRoute = ({ children, isAuth, ...rest }) => {
+  //   return (
+  //     <Route
+  //       {...rest}
+  //       render={({ location }) =>
+  //       localStorage.getItem('user') ? (
+  //           children
+  //         ) : (
+  //           <Redirect
+  //             to={{
+  //               pathname: "/login",
+  //               state: { from: location }
+  //             }}
+  //           />
+  //         )
+  //       }
+  //     />
+  //   );
+  // }
 
   export default PrivateRoute;

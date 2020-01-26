@@ -23,26 +23,27 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const Login = ({dispatch})=>{
+const Register = ({dispatch})=>{
 
-    const [state, setState] = useState({ email: '', password: '' });
-    const { email, password } = state;
-    const history = useHistory();
+    const [state, setState] = useState({ name: '', email: '', password: '' });
+    const { name, email, password } = state; 
+    let history = useHistory();
     const classes = useStyles();
-    const [value, setValue] = React.useState('Controlled');
-
-    const handleInputChange = ({ target: { name, value } }) => {
-        setState({ ...state, [name]: value });
+    
+ 
+    const handleInputChange = (event) => {
+      const { target: { name, value } } = event;
+      setState({...state, [name]: value });
     }
   
-    
-        const onSubmit = () => {
-        firebase.login(email, password)
+    const onSubmit = () => {
+      const { name, email, password } = state; 
+      firebase.register(name, email, password )
         .then(response => {
-            history.push('/home')
+          history.push('/login');
         })
         .catch((err) => {
-            // set error message here
+          // Set error message here
         })
     }
    
@@ -55,8 +56,19 @@ const Login = ({dispatch})=>{
       <div>
         <TextField
           id="standard-textarea"
-          label='Enter Email'
-          placeholder='Email'
+          label='Enter Name'
+          placeholder='Name'
+          multiline
+          onChange={handleInputChange}
+          value={name}
+          name="name"
+        />
+      </div>
+      <div>
+        <TextField
+          id="standard-textarea"
+          label="Enter Email"
+          placeholder="Email"
           multiline
           onChange={handleInputChange}
           value={email}
@@ -74,7 +86,6 @@ const Login = ({dispatch})=>{
           name="password"
         />
       </div>
-   
     </form>
     <div>
     <Button
@@ -85,7 +96,7 @@ const Login = ({dispatch})=>{
         startIcon={<SaveIcon />}
         onClick={onSubmit}
       >
-        LOGIN
+        Register
       </Button>
  
     </div>
@@ -94,6 +105,5 @@ const Login = ({dispatch})=>{
     )
 }
 
-export default Login;
-
+export default Register;
 
