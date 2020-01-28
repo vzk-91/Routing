@@ -19,17 +19,14 @@ function App() {
   return (
     <FirebaseContext.Provider value={{ user, firebase }}>
       <BrowserRouter>
-    <div className="App">
-        <Navigate/>
-        <Switch>
-          <Route  path="/login" render = {()=> < Login />} />
-          <Route exact path="/registration"  render = {()=> < Register />}/>
-          <PrivateRoute authenticated={user} component={Home} />
-          {/* <PrivateRoute path="/home">
-              <Home />
-            </PrivateRoute> */}
-        </Switch>
-    </div>
+         <div className="App">
+            <Navigate/>
+            <Switch>
+              <Route exact path="/login" render = {()=> < Login />} />
+              <Route exact path="/registration"  render = {()=> < Register />}/>
+              <PrivateRoute authenticated={user} component={Home}  />
+            </Switch>
+         </div>
     </BrowserRouter>
     </FirebaseContext.Provider>
   );
