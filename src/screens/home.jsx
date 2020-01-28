@@ -32,12 +32,12 @@ const useStyles = makeStyles(theme => ({
 
 const Home = ()=> {
  
-  const {user,firebase} = useContext(FirebaseContext)
-  const [spacing, setSpacing] = useState(2);
-  const [cars,setCars] = useState([])
-  const classes = useStyles();
-  const example = { brand: '', model: '', year: '', description : '' }
-  const [state, setState] = useState({ ...example});
+    const {user,firebase} = useContext(FirebaseContext)
+    const [spacing, setSpacing] = useState(2);
+    const [cars,setCars] = useState([])
+    const classes = useStyles();
+    const example = { brand: '', model: '', year: '', description : '' }
+    const [state, setState] = useState({ ...example});
     const { brand, model, year,description } = state; 
     let history = useHistory();
 
